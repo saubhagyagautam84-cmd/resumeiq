@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: resumeiq-api
+    runtime: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false          # Set this manually in the Render dashboard
+      - key: CORS_ORIGINS
+        value: "*"           # Replace with your Vercel URL after deploy, e.g. https://resumeiq.vercel.app
+      - key: DATABASE_URL
+        value: sqlite:///./resumeiq.db

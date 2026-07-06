@@ -1,0 +1,287 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ════════════════════════════════════════════
+   DESIGN TOKENS
+════════════════════════════════════════════ */
+:root {
+  --purple-50:   #F0EFFE;
+  --purple-100:  #E4E1FD;
+  --purple-200:  #C9C4FB;
+  --purple-mid:  #7F77DD;
+  --purple-500:  #6860D4;
+  --purple-600:  #534AB7;
+  --purple-700:  #3C3489;
+  --purple-dark: #26215C;
+
+  --teal-50:     #E6F7F2;
+  --teal-100:    #C8EFE3;
+  --teal-mid:    #1D9E75;
+  --teal-600:    #0F6E56;
+  --teal-700:    #085041;
+  --teal-dark:   #04342C;
+
+  --coral-50:    #FDF0EC;
+  --coral-mid:   #D85A30;
+  --coral-600:   #993C1D;
+  --coral-dark:  #712B13;
+
+  --amber-50:    #FEF3E2;
+  --amber-mid:   #BA7517;
+  --amber-dark:  #633806;
+
+  --blue-50:     #EAF3FB;
+  --blue-mid:    #2E7AC9;
+  --blue-dark:   #0C447C;
+
+  --pink-50:     #FBEAF0;
+  --pink-mid:    #C94D7C;
+  --pink-dark:   #72243E;
+
+  --text-body:   #18181B;
+  --text-muted:  #52525B;
+  --text-faint:  #A1A1AA;
+  --border:      #E4E4E7;
+  --border-soft: #F0F0EF;
+  --surface:     #FFFFFF;
+  --surface-2:   #FAFAF9;
+}
+
+/* ════════════════════════════════════════════
+   BASE RESET
+════════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { margin: 0; padding: 0; min-height: 100vh; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: var(--text-body);
+  background:
+    radial-gradient(ellipse at 0% 0%,   #E8E5FF 0%,  transparent 50%),
+    radial-gradient(ellipse at 100% 0%,  #D6F5EB 0%,  transparent 50%),
+    radial-gradient(ellipse at 100% 100%, #FDEEE8 0%, transparent 50%),
+    radial-gradient(ellipse at 0% 100%,  #F5E8FF 0%,  transparent 60%),
+    #F4F3FF;
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle custom scrollbar */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #D4D4D8; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #A1A1AA; }
+
+/* ════════════════════════════════════════════
+   ANIMATIONS
+════════════════════════════════════════════ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(127,119,221,0.35); }
+  70%  { box-shadow: 0 0 0 8px rgba(127,119,221,0); }
+  100% { box-shadow: 0 0 0 0 rgba(127,119,221,0); }
+}
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+/* ════════════════════════════════════════════
+   CARD
+════════════════════════════════════════════ */
+.riq-card {
+  background: var(--surface);
+  border-radius: 14px;
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.04),
+    0 4px 12px rgba(0,0,0,0.06);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.riq-card:hover {
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.05),
+    0 8px 24px rgba(0,0,0,0.09);
+}
+
+/* ════════════════════════════════════════════
+   INPUTS
+════════════════════════════════════════════ */
+.riq-input {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 9px;
+  font-size: 14px;
+  font-family: inherit;
+  outline: none;
+  background: var(--surface);
+  color: var(--text-body);
+  transition: border-color 0.15s, box-shadow 0.15s;
+  appearance: none;
+}
+.riq-input:focus {
+  border-color: var(--purple-mid);
+  box-shadow: 0 0 0 3px rgba(127,119,221,0.15);
+}
+.riq-input::placeholder { color: var(--text-faint); }
+textarea.riq-input { resize: vertical; }
+
+.riq-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+  letter-spacing: 0.2px;
+}
+
+/* ════════════════════════════════════════════
+   BUTTONS
+════════════════════════════════════════════ */
+.riq-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 9px 22px;
+  border-radius: 9px;
+  font-size: 14px; font-weight: 600; font-family: inherit;
+  cursor: pointer; white-space: nowrap; border: none;
+  transition: all 0.18s;
+  letter-spacing: 0.1px;
+}
+.riq-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.riq-btn:not(:disabled):active { transform: translateY(1px); }
+
+/* Primary — gradient purple */
+.riq-btn-primary {
+  background: linear-gradient(135deg, #7F77DD 0%, #534AB7 100%);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(83,74,183,0.30);
+}
+.riq-btn-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, #6860D4 0%, #3C3489 100%);
+  box-shadow: 0 4px 14px rgba(83,74,183,0.40);
+  transform: translateY(-1px);
+}
+
+/* Teal */
+.riq-btn-teal {
+  background: linear-gradient(135deg, #1D9E75 0%, #0F6E56 100%);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(15,110,86,0.25);
+}
+.riq-btn-teal:hover:not(:disabled) {
+  background: linear-gradient(135deg, #22B888 0%, #085041 100%);
+  box-shadow: 0 4px 14px rgba(15,110,86,0.35);
+  transform: translateY(-1px);
+}
+
+/* Secondary */
+.riq-btn-secondary {
+  background: var(--surface);
+  color: var(--purple-dark);
+  border: 1.5px solid var(--border);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.riq-btn-secondary:hover:not(:disabled) {
+  background: var(--purple-50);
+  border-color: var(--purple-mid);
+  box-shadow: 0 2px 8px rgba(127,119,221,0.15);
+}
+
+/* Coral / danger */
+.riq-btn-coral {
+  background: linear-gradient(135deg, #D85A30 0%, #993C1D 100%);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(216,90,48,0.25);
+}
+.riq-btn-coral:hover:not(:disabled) { transform: translateY(-1px); }
+
+/* ════════════════════════════════════════════
+   RANGE SLIDER
+════════════════════════════════════════════ */
+input[type="range"] {
+  -webkit-appearance: none; appearance: none;
+  height: 4px; border-radius: 2px;
+  background: var(--border); outline: none; cursor: pointer; width: 100%;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: linear-gradient(135deg, #7F77DD, #534AB7);
+  border: 2.5px solid #fff;
+  box-shadow: 0 2px 6px rgba(83,74,183,0.35);
+  cursor: pointer;
+  transition: transform 0.15s;
+}
+input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+
+/* ════════════════════════════════════════════
+   GRADIENT TEXT UTILITY
+════════════════════════════════════════════ */
+.gradient-text-purple {
+  background: linear-gradient(135deg, #7F77DD 0%, #26215C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.gradient-text-teal {
+  background: linear-gradient(135deg, #1D9E75 0%, #04342C 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Page fade-in */
+main > * { animation: fadeUp 0.3s ease both; }
+
+/* ════════════════════════════════════════════
+   MOBILE RESPONSIVE
+════════════════════════════════════════════ */
+
+/* Hide scrollbar for horizontal scroll strips */
+.riq-scroll-x { overflow-x: auto; scrollbar-width: none; -ms-overflow-style: none; }
+.riq-scroll-x::-webkit-scrollbar { display: none; }
+
+@media (max-width: 639px) {
+  /* Touch-friendly tap targets */
+  .riq-btn { min-height: 44px; padding-inline: 18px; }
+
+  /* Tighter card padding on mobile */
+  .riq-card { border-radius: 12px; }
+
+  /* Full-width modals on mobile */
+  .riq-modal-inner {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    border-radius: 16px 16px 0 0 !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    max-height: 92vh !important;
+    overflow-y: auto !important;
+  }
+  .riq-modal-overlay {
+    align-items: flex-end !important;
+  }
+
+  /* Prevent body scroll when modal open */
+  body.modal-open { overflow: hidden; }
+
+  /* Readable body text */
+  body { font-size: 15px; }
+
+  /* Inputs large enough to avoid auto-zoom on iOS */
+  .riq-input { font-size: 16px !important; }
+  textarea.riq-input { font-size: 16px !important; }
+}
+
+/* Tablets (640–1023px) */
+@media (min-width: 640px) and (max-width: 1023px) {
+  body { font-size: 14px; }
+}
